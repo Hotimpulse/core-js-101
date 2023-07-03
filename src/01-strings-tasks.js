@@ -71,7 +71,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(str) {
-  let resStr = str.split(", ");
+  const resStr = str.split(', ');
   return resStr[1].slice(0, -1);
 }
 
@@ -132,12 +132,12 @@ function repeatString(str, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-  let str1 = str.split("")
-  let str2 = value.split("");
-  let res = str1.pop(str2);
-  if (str.includes(value)) console.log(res);
+  const index = str.indexOf(value);
+  if (index !== -1) {
+    return str.slice(0, index) + str.slice(index + value.length);
+  }
+  return str;
 }
-removeFirstOccurrences('I like legends', 'end')
 /**
  * Remove the first and last angle brackets from tag string
  *
@@ -184,7 +184,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  return str.split(";").map(email => email.trim());
+  return str.split(';').map((email) => email.trim());
 }
 
 /**
@@ -211,7 +211,7 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-  const horLine = '-'.repeat(width-2);
+  const horLine = '-'.repeat(width - 2);
   const top = `┌${horLine}┐\n`;
   const mid = `│${' '.repeat(width - 2)}│\n`;
   const bottom = `└${horLine}┘\n`;
@@ -238,9 +238,9 @@ function getRectangleString(width, height) {
  */
 function encodeToRot13(str) {
   return str.replace(/[a-zA-Z]/g, (char) => {
-    let str1 = char.charCodeAt(0);
-    let reg = str1 <= 90 ? 65 : 97;
-    return String.fromCharCode((str1 - reg + 13) % 26 + reg) 
+    const str1 = char.charCodeAt(0);
+    const reg = str1 <= 90 ? 65 : 97;
+    return String.fromCharCode(((str1 - reg + 13) % 26) + reg);
   });
 }
 
@@ -288,10 +288,10 @@ function isString(value) {
  */
 function getCardId(value) {
   const cards = [
-    'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-    'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-    'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
   ];
 
   return cards.indexOf(value);

@@ -20,7 +20,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-  return width*height;
+  return width * height;
 }
 
 
@@ -36,7 +36,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCircleCircumference(radius) {
-  return 2*Math.PI*radius;
+  return 2 * Math.PI * radius;
 }
 
 /**
@@ -52,7 +52,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2)/2;
+  return (value1 + value2) / 2;
 }
 
 /**
@@ -71,7 +71,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt((x2 - x1)**2 + (y2 - y1)**2);
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
@@ -163,7 +163,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelepipedDiagonal(a, b, c) {
-  return Math.sqrt(a**2 + b**2 + c**2);
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 
@@ -211,11 +211,21 @@ function isPrime(n) {
     return false;
   }
 
-  for(let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i === 0) {
+  if (n === 2 || n === 3) {
+    return true;
+  }
+  if (n % 2 === 0 || n % 3 === 0) {
+    return false;
+  }
+  const sqrtN = Math.floor(Math.sqrt(n));
+  let i = 5;
+  while (i <= sqrtN) {
+    if (n % i === 0 || n % (i + 2) === 0) {
       return false;
     }
+    i += 6;
   }
+
   return true;
 }
 
@@ -236,7 +246,7 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
   const converter = Number(value);
-  return isNaN(converter) ? def : converter;
+  return Number.isFinite(converter) ? converter : def;
 }
 
 module.exports = {

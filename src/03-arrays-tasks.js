@@ -36,8 +36,8 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  let arr = [];
-  for (let i = 1; i <= len * 2; i += 2){
+  const arr = [];
+  for (let i = 1; i <= len * 2; i += 2) {
     arr.push(i);
   }
   return arr;
@@ -73,7 +73,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-  return arr.filter(num => num > 0);
+  return arr.filter((num) => num > 0);
 }
 
 /**
@@ -88,7 +88,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter(str => (typeof str === 'string'));
+  return arr.filter((str) => (typeof str === 'string'));
 }
 
 /**
@@ -205,7 +205,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  return arr.map(row => row.join(",")).join('\n');
+  return arr.map((row) => row.join(',')).join('\n');
 }
 
 /**
@@ -220,7 +220,7 @@ function toCsvText(arr) {
  *   [ 10, 100, -1 ]      => [ 100, 10000, 1 ]
  */
 function toArrayOfSquares(arr) {
-  return arr.map(x => x*x);
+  return arr.map((x) => x * x);
 }
 
 
@@ -243,7 +243,7 @@ function getMovingSum(arr) {
   return arr.map((x) => {
     sum += x;
     return sum;
-  })
+  });
 }
 
 /**
@@ -277,7 +277,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return arr.flatMap((item, index) => Array.from({length: index + 1}, () => item));
+  return arr.flatMap((item, index) => Array.from({ length: index + 1 }, () => item));
 }
 
 
@@ -295,7 +295,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-  return arr.sort((a,b) => b - a).slice(0, 3);
+  return arr.sort((a, b) => b - a).slice(0, 3);
 }
 
 
@@ -313,7 +313,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter(num => typeof num === "number" && num > 0).length;
+  return arr.filter((num) => typeof num === 'number' && num > 0).length;
 }
 
 /**
@@ -412,7 +412,7 @@ function findAllOccurrences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-  return arr.join(",");
+  return arr.join(',');
 }
 
 
@@ -448,7 +448,7 @@ function sortCitiesArray(arr) {
       return a.city.localeCompare(b.city);
     }
     return a.country.localeCompare(b.country);
-  })
+  });
   return arr;
 }
 
@@ -471,15 +471,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const matrix = [];
-  for (let i = 0; i < n; i++) {
-    const row = [];
-    for (let j = 0; j < n; j++) {
-      row.push(i === j ? 1 : 0);
-    }
-    matrix.push(row);
-  }
-  return matrix;
+  return Array.from({ length: n }, (__, i) => Array.from({ length: n }, (___, j) => +(i === j)));
 }
 
 /**
@@ -496,11 +488,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  const arr = [];
-  for (let i = start; i <= end; i++) {
-    arr.push(i);
-  }
-  return arr;
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
 }
 
 /**
@@ -550,18 +538,14 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const resMap = new Map();
-  for (const item of array) {
+  array.forEach((item) => {
     const key = keySelector(item);
     const value = valueSelector(item);
-    if (resMap.has(key)) {
-      resMap.get(key).push(value);
-    }else{
-      resMap.set(key, [value]);
-    }
-  }
+    const valuesArray = resMap.get(key) || [];
+    resMap.set(key, [...valuesArray, value]);
+  });
   return resMap;
 }
-
 
 /**
  * Projects each element of the specified array to a sequence
@@ -577,14 +561,8 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  const res = [];
-  for (const el of arr) {
-    const children = childrenSelector(el);
-    res.push(...children);
-  }
-  return res;
+  return arr.flatMap(childrenSelector);
 }
-
 
 /**
  * Returns an element from the multidimensional array by the specified indexes.
