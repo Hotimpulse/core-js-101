@@ -31,7 +31,7 @@
 function willYouMarryMe(isPositiveAnswer) {
   return new Promise((res, rej) => {
     if (typeof isPositiveAnswer !== 'boolean') {
-      rej(new Error('Error: Wrong parameter is passed!'));
+      rej(new Error('Wrong parameter is passed! Ask her again.'));
     } else if (isPositiveAnswer) {
       res('Hooray!!! She said "Yes"!');
     } else {
