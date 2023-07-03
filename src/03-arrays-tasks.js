@@ -36,11 +36,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  const arr = [];
-  for (let i = 1; i <= len * 2; i += 2) {
-    arr.push(i);
-  }
-  return arr;
+  return Array.from({ length: len }, (_, index) => index * 2 + 1);
 }
 
 
@@ -374,7 +370,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-  return arr.filter((num) => !(Boolean(num)).length);
+  return arr.filter((value) => !value).length;
 }
 
 /**
