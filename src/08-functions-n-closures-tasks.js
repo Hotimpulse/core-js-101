@@ -208,7 +208,7 @@ function partialUsingArguments(fn, ...args1) {
 function getIdGeneratorFunction(startFrom) {
   let count = startFrom;
 
-  return function () {
+  return function getId() {
     const result = count;
     count += 1;
     return result;
